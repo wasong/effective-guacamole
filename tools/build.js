@@ -7,22 +7,6 @@ const task = require('./task')
 const config = require('./config')
 const { ncp } = require('ncp')
 
-ncp(
-  './node_modules/pspdfkit/dist/pspdfkit-lib',
-  './public/pspdfkit-lib',
-  (err) => {
-    if (err) console.error(err)
-  },
-)
-
-ncp(
-  './node_modules/pspdfkit/dist/pspdfkit.js',
-  './public/assets/pspdfkit.js',
-  (err) => {
-    if (err) console.error(err)
-  },
-)
-
 // Copy ./index.html into the /public folder
 const html = task('html', () => {
   const webpackConfig = require('./webpack.config')
@@ -45,6 +29,7 @@ const bundle = task('bundle', () => {
   return new Promise((resolve, reject) => {
     webpack(webpackConfig, (err, stats) => {
       if (err || stats.hasErrors()) {
+        console.log('rejected')
         reject(err || stats.hasErrors())
       }
       console.log(stats.toString(webpackConfig.stats))
