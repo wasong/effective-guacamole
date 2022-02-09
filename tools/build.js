@@ -1,11 +1,9 @@
-require('dotenv-flow').config()
 const fs = require('fs')
 const ejs = require('ejs')
 const webpack = require('webpack')
 const rimraf = require('rimraf')
 const task = require('./task')
 const config = require('./config')
-const { ncp } = require('ncp')
 
 // Copy ./index.html into the /public folder
 const html = task('html', () => {
@@ -29,7 +27,6 @@ const bundle = task('bundle', () => {
   return new Promise((resolve, reject) => {
     webpack(webpackConfig, (err, stats) => {
       if (err || stats.hasErrors()) {
-        console.log('rejected')
         reject(err || stats.hasErrors())
       }
       console.log(stats.toString(webpackConfig.stats))

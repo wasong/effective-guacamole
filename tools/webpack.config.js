@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const AssetsPlugin = require('assets-webpack-plugin')
-const CpuProfilerWebpackPlugin = require('cpuprofile-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const pkg = require('../package.json')
 
@@ -184,6 +183,7 @@ if (isDebug) {
 }
 
 if (withProfiler) {
+  const CpuProfilerWebpackPlugin = require('cpuprofile-webpack-plugin')
   config.plugins.push(new CpuProfilerWebpackPlugin())
 }
 
